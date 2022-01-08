@@ -19,13 +19,13 @@ namespace XReal.XTown.Yacht
         public bool showTrigger = false;
         public bool pickTrigger = false;
         public bool takeOutTrigger = false;
-        private Vector3 prevPosition;
-        private Vector3 targetPosition;
-        private Quaternion prevRotation;
-        private Quaternion targetRotation;
+        protected Vector3 prevPosition;
+        protected Vector3 targetPosition;
+        protected Quaternion prevRotation;
+        protected Quaternion targetRotation;
 
-        private float timeStartedLerping;
-        private float lerpTime = 0.35f;
+        protected float timeStartedLerping;
+        protected float lerpTime = 0.35f;
 
         public Rigidbody rb;
         public Vector3 diceVelocity;
@@ -36,11 +36,12 @@ namespace XReal.XTown.Yacht
 
 
         // Start is called before the first frame update
-        void Start()
+        protected virtual void Start()
         {
             rb = GetComponent<Rigidbody>();
 
             DiceInfo info = new DiceInfo();
+            // are we just setting dice Index to 0?
             info.diceIndex = diceIndex;
             info.diceNumber = 0;
             info.sortedIndex = 0;
@@ -48,11 +49,11 @@ namespace XReal.XTown.Yacht
             info.keeping = false;
             diceInfoList.Add(info);
             diceInfo = info;
-
+            Debug.Log("properly init DiceScript(old)" + info.diceIndex);
         }
 
         // Update is called once per frame
-        void Update()
+        protected virtual void Update()
         {
             diceVelocity = rb.velocity;
 

@@ -12,7 +12,7 @@ namespace XReal.XTown.Yacht
         public UnityEvent onRollingFinish;
 
         // Start is called before the first frame update
-        void Awake()
+        protected virtual void Start()
         {
             dices = transform.GetComponentsInChildren<DiceScript>();
             int diceIndex = 0;
@@ -21,13 +21,9 @@ namespace XReal.XTown.Yacht
                 dice.diceIndex = diceIndex;
                 diceIndex += 1;
             }
+            Debug.Log("dices after init(dicemanager:old) " + dices.Length);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         public void OnInitialze()
         {
@@ -58,6 +54,7 @@ namespace XReal.XTown.Yacht
             {
                 if (dice.diceInfo.keeping == false)
                 {
+                    Debug.Log("OnReadyStart callback / diceManager.");
                     dice.Ready();
                 }
             }
@@ -93,7 +90,7 @@ namespace XReal.XTown.Yacht
             StartCoroutine(DiceRollFinish(sortedUnkeptList));
         }
 
-        public void OnFinish()
+        public virtual void OnFinish()
         {
             var sortedList = DiceScript.diceInfoList.OrderBy(x => x.diceNumber).ToList();
 
@@ -119,7 +116,7 @@ namespace XReal.XTown.Yacht
             }
         }
 
-        IEnumerator TurnFinish(List<DiceInfo> sortedUnkeptList)
+        protected virtual IEnumerator TurnFinish(List<DiceInfo> sortedUnkeptList)
         {
             foreach (DiceInfo diceInfo in sortedUnkeptList)
             {

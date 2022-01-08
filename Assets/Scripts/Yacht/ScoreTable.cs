@@ -7,13 +7,13 @@ namespace XReal.XTown.Yacht
 {
     public class ScoreTable : MonoBehaviour
     {
-        private Transform scoreContainer;
-        private Transform scoreTemplate;
+        protected Transform scoreContainer;
+        protected Transform scoreTemplate;
 
-        private Dictionary<string, Dictionary<string, int>> strategies = StrategyScript.strategies;
-        private List<Text> scoreTexts = new List<Text>();
+        protected Dictionary<string, Dictionary<string, int>> strategies = StrategyScript.strategies;
+        protected List<Text> scoreTexts = new List<Text>();
 
-        private void Awake()
+        protected virtual void Start()
         {
             scoreContainer = transform.Find("ScoreContainer");
             scoreTemplate = scoreContainer.Find("ScoreTemplate");
@@ -31,6 +31,7 @@ namespace XReal.XTown.Yacht
                 scoreTransform.Find("ScoreBackground/CategoryText").GetComponent<Text>().text = StrategyScript.strategiesOrder[i];
                 Text scoreText = scoreTransform.Find("ScoreText").GetComponent<Text>();
                 scoreTexts.Add(scoreText);
+
             }
         }
 

@@ -19,9 +19,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         get => _meDone;
         private set { _meDone = value; }
     }
-    // listener 
-
+    // multiplay?
     public ITurnCallbacks TurnListener;
+    public bool networked = false;
     /// Monobehaviour callbacks
     private void Awake()
     {
@@ -30,7 +30,15 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
     private void Start()
     {
-        TurnListener = GetComponent<GameManager>();
+        networked = PhotonNetwork.IsConnected;
+        if (networked)
+        {
+            TurnListener = GetComponent<GameManagerMulti>();
+        }
+        else{
+            Debug.LogWarning("NOT CONNECTED TO NETWORK: singleplay mode");
+            return;
+        }
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             Debug.Log("NetworkManager: alone in the room.");

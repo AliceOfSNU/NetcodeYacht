@@ -22,7 +22,7 @@ namespace XReal.XTown.Yacht
         finish
     }
 
-    public class GameManager : MonoBehaviour, ITurnCallbacks
+    public class GameManager : MonoBehaviour
     {
         public static GameManager instance;
         public static Quaternion[] rotArray = new Quaternion[6];
@@ -43,7 +43,7 @@ namespace XReal.XTown.Yacht
         protected bool readyTrigger = false;
 
 
-        void Awake()
+        protected void Awake()
         {
             if (instance == null)
             {
@@ -69,9 +69,9 @@ namespace XReal.XTown.Yacht
             rotArray[5] = Quaternion.Euler(-90f, 90f, 0f);
         }
 
-        /*
+        
         // Update is called once per frame
-        void Update()
+        protected virtual void Update()
         {
             // 주사위 및 기타 변수 초기화 후 ready로 이동
             if (currentGameState == GameState.initializing)
@@ -157,96 +157,19 @@ namespace XReal.XTown.Yacht
             }
         }
         
-        */
+        
 
         public static void SetGameState(GameState newGameState)
         {
             if (Enum.IsDefined(typeof(GameState), newGameState))
             {
                 currentGameState = newGameState;
-                Debug.Log("game state update: newGameState");
+                Debug.Log("game state update:" + newGameState);
             }
             
         }
-        
-
-        /* multiplay */
-        /* test UI */
-        public void OnClick_randomDice()
-        {
-            int[] intarr = new int[5];
-            for (int i = 0; i < intarr.Length; ++i)
-            {
-                intarr[i] = UnityEngine.Random.Range(0, 9);
-            }
-            NetworkManager.Instance.SendDiceResult(intarr);
-        }
-
-        public void Onclick_endTurn()
-        {
-            NetworkManager.Instance.SendFinishTurn();
-            if (NetworkManager.Instance.MeDone)
-            {
-                diceBtn.interactable = false;
-                endBtn.interactable = false;
-            }
-        }
-        /* multiplay test */
 
 
-        /* impl */
-        public Text turnText;
-
-        public Button diceBtn;
-        public Button endBtn;
-        
-        public void SetTurnText(int turn)
-        {
-            turnText.text = "turn " + turn;
-        }
-
-
-        public void OnTurnBegins(int turn)
-        {
-            Debug.Log("synced Turn: " + turn);
-            SetTurnText(turn);
-            if (!NetworkManager.Instance.MeDone)
-            {
-                diceBtn.interactable = true;
-                endBtn.interactable = true;
-            }
-        }
-
-        public void OnPlayerDiceResult(Player player, int turn, int[] results)
-        {
-            string msg = "on turn #" + turn + ", player " + player.ActorNumber + " rolled: ";
-            foreach (int num in results) msg += num;
-            Debug.Log(msg);
-        }
-
-        public void OnPlayerStrategySelected(Player player, int turn, int move)
-        {
-            string msg = "on turn #" + turn + ", player " + player.ActorNumber + " selected: " + move;
-        }
-
-        public void OnPlayerFinished(Player player, int turn)
-        {
-            if (NetworkManager.Instance.Turn != turn)
-            {
-                Debug.LogError("Turn miss sync");
-                return;
-            }
-
-            if (player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber) // me finished
-            {
-                return;
-            }
-
-            Debug.Log("player #" + player.ActorNumber + "'s turn end synced");
-            Debug.Log("player #" + PhotonNetwork.LocalPlayer.ActorNumber + " beginning turn");
-
-            NetworkManager.Instance.BeginTurn();
-        }
     }
 }
 
