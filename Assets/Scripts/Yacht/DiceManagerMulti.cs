@@ -20,15 +20,22 @@ namespace XReal.XTown.Yacht
                 return;
             }
 
-            dices = transform.GetComponentsInChildren<DiceScriptMulti>();
+            
             int diceIndex = 0;
             foreach (var dice in dices)
             {
                 dice.diceIndex = diceIndex;
                 diceIndex += 1;
+                dice.InitDice();
             }
         }
 
-
+        public static void BeginSyncDices()
+        {
+            foreach (DiceScriptMulti dice in dices)
+            {
+                dice.BeginSyncDice();
+            }
+        }
     }
 }

@@ -7,15 +7,19 @@ namespace XReal.XTown.Yacht
 {
     public class ScoreTable : MonoBehaviour
     {
-        protected Transform scoreContainer;
-        protected Transform scoreTemplate;
+        protected static Transform scoreContainer;
+        protected static Transform scoreTemplate;
 
         protected Dictionary<string, Dictionary<string, int>> strategies = StrategyScript.strategies;
-        protected List<Text> scoreTexts = new List<Text>();
+        protected static List<Text> scoreTexts = new List<Text>();
 
-        protected virtual void Start()
+        protected virtual void Awake()
         {
             scoreContainer = transform.Find("ScoreContainer");
+
+        }
+        public static void InitSingleTable()
+        {
             scoreTemplate = scoreContainer.Find("ScoreTemplate");
 
             scoreTemplate.gameObject.SetActive(false);
@@ -35,7 +39,7 @@ namespace XReal.XTown.Yacht
             }
         }
 
-        public void UpdateScoreTable()
+        public virtual void UpdateScoreTable()
         {
             GameState _gameState = GameManager.currentGameState;
             Dictionary<string, int> _strategy = null;

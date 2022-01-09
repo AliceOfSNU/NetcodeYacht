@@ -78,6 +78,7 @@ namespace XReal.XTown.Yacht
             {
                 SetGameState(GameState.ready);
                 turnCount = 1;
+
                 onInitialize.Invoke();
                 readyTrigger = true;
                 // TODO ShownSlot 초기화도 onInitialize 이벤트에 추가해야 함

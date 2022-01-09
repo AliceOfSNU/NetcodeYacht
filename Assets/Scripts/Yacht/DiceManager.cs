@@ -8,20 +8,23 @@ namespace XReal.XTown.Yacht
 {
     public class DiceManager : MonoBehaviour
     {
-        public static DiceScript[] dices;
+        public static DiceScriptMulti[] dices;
         public UnityEvent onRollingFinish;
 
+        protected virtual void Awake()
+        {
+            dices = transform.GetComponentsInChildren<DiceScriptMulti>();
+        }
         // Start is called before the first frame update
         protected virtual void Start()
         {
-            dices = transform.GetComponentsInChildren<DiceScript>();
             int diceIndex = 0;
             foreach (var dice in dices)
             {
                 dice.diceIndex = diceIndex;
                 diceIndex += 1;
+                dice.InitDice();
             }
-            Debug.Log("dices after init(dicemanager:old) " + dices.Length);
         }
 
 
@@ -54,7 +57,6 @@ namespace XReal.XTown.Yacht
             {
                 if (dice.diceInfo.keeping == false)
                 {
-                    Debug.Log("OnReadyStart callback / diceManager.");
                     dice.Ready();
                 }
             }
@@ -111,6 +113,7 @@ namespace XReal.XTown.Yacht
             foreach (DiceInfo diceInfo in sortedUnkeptList)
             {
                 int i = diceInfo.diceIndex;
+                Debug.Log("DiceRollFinish@DiceManager #" + diceInfo.diceIndex);
                 dices[i].OnRollingFinish();
                 yield return new WaitForSecondsRealtime(0.05f);
             }

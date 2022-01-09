@@ -8,29 +8,32 @@ namespace XReal.XTown.Yacht
 
     public class DiceScriptMulti : DiceScript
     {
-
+        PhotonTransformView view;
+        protected void Awake()
+        {
+            view = GetComponent<PhotonTransformView>();
+        }
         protected override void Start()
         {
             if (!NetworkManager.Instance.networked)
             {
-                // disable sync if 
-                PhotonTransformView view = GetComponent<PhotonTransformView>();
                 view.enabled = false;
-                
                 base.Start();
-                Debug.LogWarning("Single Mode dice script init!: current stack: " + diceInfoList.Count);
                 return;
             }
 
             base.Start();
+        }
 
+        public void BeginSyncDice()
+        {
+            if (!view.enabled) view.enabled = true;
         }
         // Update is called once per frame
         protected override void Update()
         {
             if (!NetworkManager.Instance.networked)
             {
-                
                 base.Update();
                 return;
             }

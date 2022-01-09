@@ -108,12 +108,11 @@ GameObject:
   - component: {fileID: 4238797340850575223}
   - component: {fileID: 8577692828281467784}
   - component: {fileID: 4033585345924123122}
-  - component: {fileID: 4979249066171952469}
+  - component: {fileID: 8250377635363818105}
   - component: {fileID: 3119979170435287162}
   - component: {fileID: 5612664138185178208}
   - component: {fileID: 5159663933319994103}
   - component: {fileID: 6340815815292405641}
-  - component: {fileID: 8250377635363818105}
   m_Layer: 0
   m_Name: MugCup
   m_TagString: Untagged
@@ -216,24 +215,25 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &4979249066171952469
-MonoBehaviour:
+--- !u!95 &8250377635363818105
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2437511489556018850}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b540890b8e57540a5bbcc50f46130c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inCupSpawnTransforms:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0c789313fb06f974f9c5f14ee65acfa4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &3119979170435287162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,11 +247,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inCupSpawnTransforms:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 6328670605837336201}
+  - {fileID: 724722959811840975}
+  - {fileID: 8765486945432553191}
+  - {fileID: 2315660816824068131}
+  - {fileID: 8170437066794238150}
 --- !u!114 &5612664138185178208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -320,27 +320,8 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: Rest
   m_SynchronizeLayers:
-  - SynchronizeType: 2
+  - SynchronizeType: 1
     LayerIndex: 0
---- !u!95 &8250377635363818105
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2437511489556018850}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0c789313fb06f974f9c5f14ee65acfa4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 1
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4040923480635178643
 GameObject:
   m_ObjectHideFlags: 0

@@ -295,6 +295,10 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4189265316350250818, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7573031271257874758, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
       propertyPath: m_Material
       value: 
@@ -366,7 +370,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 252965580}
-  - component: {fileID: 252965581}
   - component: {fileID: 252965582}
   m_Layer: 5
   m_Name: ScoreTable
@@ -398,18 +401,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &252965581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 252965579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10b152765cea4a541b0ceca37d33da87, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &252965582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,6 +439,10 @@ PrefabInstance:
     - target: {fileID: 2619533232677286084, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4189265316350250818, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
+      propertyPath: sceneViewId
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7573031271257874758, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
       propertyPath: m_Material
@@ -1185,6 +1180,10 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4189265316350250818, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7573031271257874758, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
       propertyPath: m_Material
       value: 
@@ -1541,7 +1540,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 669142504}
-  - component: {fileID: 669142503}
   - component: {fileID: 669142505}
   - component: {fileID: 669142506}
   m_Layer: 0
@@ -1551,282 +1549,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &669142503
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 669142502}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a718911c37ca884491d46ada695eecb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onInitialize:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1834465622}
-        m_TargetAssemblyTypeName: XReal.XTown.Yacht.DiceManager, Assembly-CSharp
-        m_MethodName: OnInitialze
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 12582705}
-        m_TargetAssemblyTypeName: PickedSlotController, Assembly-CSharp
-        m_MethodName: OnInitialize
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 649805528}
-        m_TargetAssemblyTypeName: StrategyScript, Assembly-CSharp
-        m_MethodName: Calculate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 252965581}
-        m_TargetAssemblyTypeName: ScoreTable, Assembly-CSharp
-        m_MethodName: UpdateScoreTable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onReadyStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 285715136856044697}
-        m_TargetAssemblyTypeName: CupManager, Assembly-CSharp
-        m_MethodName: OnReadyStart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1834465622}
-        m_TargetAssemblyTypeName: XReal.XTown.Yacht.DiceManager, Assembly-CSharp
-        m_MethodName: OnReadyStart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 252965581}
-        m_TargetAssemblyTypeName: ScoreTable, Assembly-CSharp
-        m_MethodName: UpdateScoreTable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onReadyToSelect:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 285715136856044697}
-        m_TargetAssemblyTypeName: CupManager, Assembly-CSharp
-        m_MethodName: OnReadyToSelect
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1834465622}
-        m_TargetAssemblyTypeName: XReal.XTown.Yacht.DiceManager, Assembly-CSharp
-        m_MethodName: OnRollingFinish
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 252965581}
-        m_TargetAssemblyTypeName: ScoreTable, Assembly-CSharp
-        m_MethodName: UpdateScoreTable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onShakingStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 285715136856044697}
-        m_TargetAssemblyTypeName: CupManager, Assembly-CSharp
-        m_MethodName: OnShakingStart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1834465622}
-        m_TargetAssemblyTypeName: XReal.XTown.Yacht.DiceManager, Assembly-CSharp
-        m_MethodName: OnInitialze
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onPouringStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 285715136856044697}
-        m_TargetAssemblyTypeName: CupManager, Assembly-CSharp
-        m_MethodName: OnPouringStart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onRollingStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1834465622}
-        m_TargetAssemblyTypeName: XReal.XTown.Yacht.DiceManager, Assembly-CSharp
-        m_MethodName: OnRollingStart
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onRollingFinish:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1834465622}
-        m_TargetAssemblyTypeName: XReal.XTown.Yacht.DiceManager, Assembly-CSharp
-        m_MethodName: OnRollingFinish
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 649805528}
-        m_TargetAssemblyTypeName: StrategyScript, Assembly-CSharp
-        m_MethodName: Calculate
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 252965581}
-        m_TargetAssemblyTypeName: ScoreTable, Assembly-CSharp
-        m_MethodName: UpdateScoreTable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 285715136856044697}
-        m_TargetAssemblyTypeName: CupManager, Assembly-CSharp
-        m_MethodName: OnRollingFinish
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1645116295}
-        m_TargetAssemblyTypeName: DisplayBestRank, Assembly-CSharp
-        m_MethodName: ShowBestRank
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  onFinish:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1834465622}
-        m_TargetAssemblyTypeName: XReal.XTown.Yacht.DiceManager, Assembly-CSharp
-        m_MethodName: OnFinish
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!4 &669142504
 Transform:
   m_ObjectHideFlags: 0
@@ -1944,7 +1666,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1687431739}
+      - m_Target: {fileID: 677988729402624589}
         m_TargetAssemblyTypeName: XReal.XTown.Yacht.CupManager, Assembly-CSharp
         m_MethodName: OnReadyStart
         m_Mode: 1
@@ -1959,7 +1681,7 @@ MonoBehaviour:
   onReadyToSelect:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1687431739}
+      - m_Target: {fileID: 677988729402624589}
         m_TargetAssemblyTypeName: XReal.XTown.Yacht.CupManager, Assembly-CSharp
         m_MethodName: OnReadyToSelect
         m_Mode: 1
@@ -1998,7 +1720,7 @@ MonoBehaviour:
   onShakingStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1687431739}
+      - m_Target: {fileID: 677988729402624589}
         m_TargetAssemblyTypeName: XReal.XTown.Yacht.CupManager, Assembly-CSharp
         m_MethodName: OnShakingStart
         m_Mode: 1
@@ -2025,7 +1747,7 @@ MonoBehaviour:
   onPouringStart:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1687431739}
+      - m_Target: {fileID: 677988729402624589}
         m_TargetAssemblyTypeName: XReal.XTown.Yacht.CupManager, Assembly-CSharp
         m_MethodName: OnPouringStart
         m_Mode: 1
@@ -2091,7 +1813,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1687431739}
+      - m_Target: {fileID: 677988729402624589}
         m_TargetAssemblyTypeName: XReal.XTown.Yacht.CupManager, Assembly-CSharp
         m_MethodName: OnRollingFinish
         m_Mode: 1
@@ -2590,6 +2312,10 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4189265316350250818, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7573031271257874758, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
       propertyPath: m_Material
       value: 
@@ -2659,9 +2385,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1834465620}
     m_Modifications:
-    - target: {fileID: 1656683040983613364, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 4189265316350250818, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
+      propertyPath: sceneViewId
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8107986763114909390, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
       propertyPath: m_Name
@@ -3543,17 +3269,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8921221484089234548, guid: 1353fb39d9941fe40a91e0fb99673859, type: 3}
   m_PrefabInstance: {fileID: 1147276426}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1687431739 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3119979170435287162, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
-  m_PrefabInstance: {fileID: 2460328439608689207}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b02539be63d9d948b0ec68a835efc15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1717223107
 GameObject:
   m_ObjectHideFlags: 0
@@ -3796,7 +3511,7 @@ Transform:
   - {fileID: 1832439729}
   - {fileID: 1865990346}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1834465621
 MonoBehaviour:
@@ -4179,83 +3894,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &285715136856044697 stripped
+--- !u!114 &677988729402624589 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4979249066171952469, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
-  m_PrefabInstance: {fileID: 2460328439608689207}
+  m_CorrespondingSourceObject: {fileID: 223220537716449686, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
+  m_PrefabInstance: {fileID: 752588003333516251}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b540890b8e57540a5bbcc50f46130c, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b02539be63d9d948b0ec68a835efc15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1255879148429380679 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4354388132440828235, guid: 22b3e55a7a75c2d4f860725794111597, type: 3}
-  m_PrefabInstance: {fileID: 3242630772468475148}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &2460328439608689207
+--- !u!1001 &752588003333516251
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2437511489556018850, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
-      propertyPath: m_Name
-      value: MugCup
-      objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7.14
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.31
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.7071068
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 120
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: 3069228871235349528, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 201951726991558132, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5612664138185178208, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+    - target: {fileID: 686423640604647246, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
+      propertyPath: m_Name
+      value: MugCup
+      objectReference: {fileID: 0}
+    - target: {fileID: 686423640604647246, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327740498869294476, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d02dc406d682e7c42a63e1f6998a9544, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: eb5a513451be5994486958e6ffc5857f, type: 3}
+--- !u!224 &1255879148429380679 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4354388132440828235, guid: 22b3e55a7a75c2d4f860725794111597, type: 3}
+  m_PrefabInstance: {fileID: 3242630772468475148}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3242630772468475148
 PrefabInstance:
   m_ObjectHideFlags: 0

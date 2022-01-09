@@ -26,17 +26,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     private void Awake()
     {
         Instance = this;
+        
     }
 
     private void Start()
     {
         networked = PhotonNetwork.IsConnected;
+        Debug.Log(networked ? "----networked----" : "----not networked----");
         if (networked)
         {
             TurnListener = GetComponent<GameManagerMulti>();
+            ScoreTableMulti.InitMultiTable();
+            Destroy(GameObject.Find("MugCup"));
+
         }
         else{
             Debug.LogWarning("NOT CONNECTED TO NETWORK: singleplay mode");
+            ScoreTable.InitSingleTable();
+            // No synchronization!
+            CupManagerMulti.DisableCupView();
             return;
         }
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
@@ -46,8 +54,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
         else
         {
             Debug.Log("Two players: Starting game");
-            // only second player will start the game,
-            // which will set his turn.
+            // the second player will instantiate the cup and the dices.
+            PhotonNetwork.Instantiate("MugCup", new Vector3(7.14f, 1.31f, 0f), Quaternion.Euler(0f, 90f, 0f));
+            Debug.Log("Cup initially owned by" + PhotonNetwork.LocalPlayer.ActorNumber);
+
+            // only second player will start the game
             BeginTurn();
         }
     }
@@ -77,7 +88,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     // public methods
     public void BeginTurn()
     {
-        Turn = this.Turn + 1;
+        Turn = Turn + 1;
         MeDone = false;
     }
 

@@ -19,13 +19,13 @@ namespace XReal.XTown.Yacht
         // Update is called once per frame
         protected override void Update()
         {
+            if (NetworkManager.Instance is null) return;
             if (!NetworkManager.Instance.networked)
             { // call base function if not networked.
                 base.Update();
                 return;
             }
             if (NetworkManager.Instance.MeDone) return;
-
             base.Update();
         }
 
@@ -38,19 +38,13 @@ namespace XReal.XTown.Yacht
             {
                 return;
             }
+            // this will set MeDone.
             NetworkManager.Instance.SendFinishTurn();
+            
             // you must not reinitialize gameState. That'll cause animator collision!
         }
         /* 
-        public void OnClick_randomDice()
-        {
-            int[] intarr = new int[5];
-            for (int i = 0; i < intarr.Length; ++i)
-            {
-                intarr[i] = UnityEngine.Random.Range(0, 9);
-            }
-            NetworkManager.Instance.SendDiceResult(intarr);
-        }
+=
 
         public void Onclick_endTurn()
         {
@@ -61,8 +55,7 @@ namespace XReal.XTown.Yacht
                 endBtn.interactable = false;
             }
         }
-        public Button diceBtn;
-        public Button endBtn;
+
         */
         public Text turnText;
 
@@ -76,8 +69,11 @@ namespace XReal.XTown.Yacht
 
         public void OnTurnBegins(int turn)
         {
+            if (NetworkManager.Instance.MeDone) return;
+            // request ownership
+            CupManagerMulti.RequestCupOwnership();
             SetGameState(GameState.initializing);
-            Debug.Log("synced Turn: " + turn);
+            Debug.Log("Turn #" + turn);
             SetTurnText(turn);
         }
 
@@ -108,7 +104,7 @@ namespace XReal.XTown.Yacht
 
             Debug.Log("player #" + player.ActorNumber + "'s turn end synced");
             Debug.Log("player #" + PhotonNetwork.LocalPlayer.ActorNumber + " beginning turn");
-            // very simple, just begin it again.
+            // if I'm not finished, I guess it's my turn -> will invoke OnBeginTurn
             NetworkManager.Instance.BeginTurn();
         }
     }

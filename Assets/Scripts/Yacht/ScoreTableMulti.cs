@@ -8,19 +8,18 @@ namespace XReal.XTown.Yacht
     public class ScoreTableMulti : ScoreTable
     {
 
-        private List<Text> scoreTextsOther = new List<Text>();
+        private static List<Text> scoreTextsOther = new List<Text>();
 
-        protected override void Start()
+
+        public static void InitMultiTable()
         {
-            if (!NetworkManager.Instance.networked)
-            { // call base function if not networked.
-                base.Start();
-                return;
-            }
-            scoreContainer = transform.Find("ScoreContainer");
-            scoreTemplate = scoreContainer.Find("ScoreTemplateMulti");
+            // set all templates inactive
 
+            scoreTemplate = scoreContainer.Find("ScoreTemplate");
             scoreTemplate.gameObject.SetActive(false);
+            scoreTemplate = scoreContainer.Find("ScoreTemplateMulti");
+            scoreTemplate.gameObject.SetActive(false);
+
 
             float templateHeight = 24f;
             for (int i = 0; i < 14; i++)
@@ -30,7 +29,7 @@ namespace XReal.XTown.Yacht
                 scoreRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
                 scoreTransform.gameObject.SetActive(true);
 
-                scoreTransform.Find("CategoryText").GetComponent<Text>().text = StrategyScript.strategiesOrder[i];
+                scoreTransform.Find("ScoreBackground/CategoryText").GetComponent<Text>().text = StrategyScript.strategiesOrder[i];
                 Text scoreText = scoreTransform.Find("ScoreText").GetComponent<Text>();
                 scoreTexts.Add(scoreText);
                 scoreText = scoreTransform.Find("ScoreTextOther").GetComponent<Text>();
@@ -38,8 +37,8 @@ namespace XReal.XTown.Yacht
 
             }
         }
+       
 
-        
     }
 }
 
