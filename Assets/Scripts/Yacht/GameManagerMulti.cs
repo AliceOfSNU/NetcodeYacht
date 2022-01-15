@@ -25,15 +25,14 @@ namespace XReal.XTown.Yacht
                 base.Update();
                 return;
             }
-            if (NetworkManager.Instance.MeDone) return;
+            if (NetworkManager.Instance.MeDone || NetworkManager.Instance.Turn < 1) return;
             base.Update();
         }
 
 
-
+        // called by selectScore once score selected.
         public static void TurnFinish()
         {
-            // called by selectScore once score selected.
             if (NetworkManager.Instance.MeDone)
             {
                 return;
@@ -67,13 +66,16 @@ namespace XReal.XTown.Yacht
         }
 
 
+        /// <summary>
+        /// Interface ITurnCallbacks impl
+        /// </summary>
         public void OnTurnBegins(int turn)
         {
             if (NetworkManager.Instance.MeDone) return;
             // request ownership
             CupManagerMulti.RequestCupOwnership();
             SetGameState(GameState.initializing);
-            Debug.Log("Turn #" + turn);
+            Debug.Log("GameManager/OnTurnBegins Turn #" + turn);
             SetTurnText(turn);
         }
 
@@ -101,7 +103,7 @@ namespace XReal.XTown.Yacht
             {
                 return;
             }
-
+            // other's turn finished
             Debug.Log("player #" + player.ActorNumber + "'s turn end synced");
             Debug.Log("player #" + PhotonNetwork.LocalPlayer.ActorNumber + " beginning turn");
             // if I'm not finished, I guess it's my turn -> will invoke OnBeginTurn

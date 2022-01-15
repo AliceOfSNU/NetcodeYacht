@@ -16,26 +16,24 @@ namespace XReal.XTown.Yacht
         protected override void Awake()
         {
             base.Awake();
-            Debug.Log("Awake for Cup called!");
+            Debug.Log("CupManagerMulti/Awake");
             transformView = GetComponent<PhotonTransformView>();
             animView = GetComponent<PhotonAnimatorView>();
             view = GetComponent<PhotonView>();
         }
 
 
-        // Start is called before the first frame update
         protected override void Start()
         {
-
-            if (!NetworkManager.Instance.networked)
-            {
-                base.Start();
-                DisableCupView();
-                return;
-            }
             base.Start();
-            // avoid animation collisions!
-            // DisableAnimator();
+            if (!PhotonNetwork.InRoom) return;
+            Debug.Log("CupManagerMulti/Start, registering callbacks");
+            // register event callbacks
+            GameManagerMulti.instance.onReadyStart.AddListener(OnReadyStart);
+            GameManagerMulti.instance.onShakingStart.AddListener(OnShakingStart);
+            GameManagerMulti.instance.onPouringStart.AddListener(OnPouringStart);
+            GameManagerMulti.instance.onReadyToSelect.AddListener(OnReadyToSelect);
+            GameManagerMulti.instance.onRollingFinish.AddListener(OnRollingFinish);
         }
 
         /// <summary>
@@ -51,6 +49,7 @@ namespace XReal.XTown.Yacht
         public static void RequestCupOwnership()
         {
             if (view.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber) return;
+            Debug.Log($"Player{PhotonNetwork.LocalPlayer.ActorNumber} requesting ownership to player{view.OwnerActorNr}");
             view.RequestOwnership();
         }
 
@@ -67,6 +66,7 @@ namespace XReal.XTown.Yacht
                 view.TransferOwnership(requestingPlayer);
             }
         }
+
     }
 }
 

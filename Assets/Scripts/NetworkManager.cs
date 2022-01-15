@@ -47,6 +47,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             CupManagerMulti.DisableCupView();
             return;
         }
+
+    }
+
+    /// UI callbacks
+    public void OnClick_LeaveRoom()
+    {
+        RoomsManager.Instance.LeaveRoom();
+    }
+
+
+    /// Photon callbacks
+    public override void OnJoinedRoom()
+    {
         if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
         {
             Debug.Log("NetworkManager: alone in the room.");
@@ -62,15 +75,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
             BeginTurn();
         }
     }
-
-    /// UI callbacks
-    public void OnClick_LeaveRoom()
-    {
-        RoomsManager.Instance.LeaveRoom();
-    }
-
-
-
     /// turn passing methods
     // defining turn
     public int Turn
@@ -90,6 +94,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
     {
         Turn = Turn + 1;
         MeDone = false;
+        // callback for this inside OnRoomPropertiesUpdate method
     }
 
     public void SendDiceResult(int[] diceResults)
@@ -198,7 +203,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks, IOnEventCallback
 
         if (props != null && props.ContainsKey("Turn"))
         {
+            // both players hear this event.
             TurnListener.OnTurnBegins(Turn);
+            Debug.Log($"NetworkManager/ Turn #{Turn}");
         }
     }
 }
