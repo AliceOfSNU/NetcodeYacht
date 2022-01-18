@@ -59,11 +59,16 @@ namespace XReal.XTown.Yacht
             PhotonView view = viewAndPlayer[0] as PhotonView;
             Player requestingPlayer = viewAndPlayer[1] as Player;
 
-            
-            if (view.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber)
+            if (view.OwnerActorNr != PhotonNetwork.LocalPlayer.ActorNumber) return;
+
+            try
             {
                 Debug.Log("handing over cup control to: player#" + requestingPlayer.ActorNumber);
                 view.TransferOwnership(requestingPlayer);
+            }
+            catch
+            {
+                Debug.LogError("Couldn't transfer control of cup.");
             }
         }
 
