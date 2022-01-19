@@ -1,4 +1,5 @@
  using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,27 +9,28 @@ namespace XReal.XTown.Yacht
 
     public class DiceScriptMulti : DiceScript
     {
-        PhotonTransformView view;
-        protected void Awake()
-        {
-            view = GetComponent<PhotonTransformView>();
-        }
+        PhotonTransformView _transformView;
+        PhotonView _view;
         protected override void Start()
         {
+            _transformView = GetComponent<PhotonTransformView>();
+            _view = GetComponent<PhotonView>();
+
+            Debug.Log("DiceScriptMulti/Start");
+
+            base.Start();
+
             if (!NetworkManager.Instance.networked)
             {
-                view.enabled = false;
-                base.Start();
+                _transformView.enabled = false;
+                _view.enabled = false;
                 return;
             }
 
-            base.Start();
+
         }
 
-        public void BeginSyncDice()
-        {
-            if (!view.enabled) view.enabled = true;
-        }
+
         // Update is called once per frame
         protected override void Update()
         {
@@ -102,6 +104,31 @@ namespace XReal.XTown.Yacht
             }
         }
 
+        /// Ownership
+        public void RequestOwnership()
+        {
+            if (_view.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber) return;
+            _view.RequestOwnership();
+        }
+
+        /// photon callbacks
+        public void OnOwnershipRequest(object[] viewAndPlayer)
+        {
+            PhotonView view = viewAndPlayer[0] as PhotonView;
+            Player requestingPlayer = viewAndPlayer[1] as Player;
+            Debug.Log("inside on ownership request from #" + requestingPlayer.ActorNumber);
+            if (view.OwnerActorNr != PhotonNetwork.LocalPlayer.ActorNumber) return;
+            Debug.Log("handing over dice control to: player#" + requestingPlayer.ActorNumber);
+
+            try
+            {
+                view.TransferOwnership(requestingPlayer);
+            }
+            catch
+            {
+                Debug.LogError("Couldn't transfer control of cup.");
+            }
+        }
 
     }
 }

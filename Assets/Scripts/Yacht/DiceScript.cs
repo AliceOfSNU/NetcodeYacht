@@ -39,30 +39,21 @@ namespace XReal.XTown.Yacht
         protected virtual void Start()
         {
             rb = GetComponent<Rigidbody>();
-            /* NOT HERE!!
-            DiceInfo info = new DiceInfo();
-            // are we just setting dice Index to 0?
-            info.diceIndex = diceIndex;
-            info.diceNumber = 0;
-            info.sortedIndex = 0;
-            info.rolling = false;
-            info.keeping = false;
-            diceInfoList.Add(info);
-            diceInfo = info;
-            */
+            InitDice();
         }
 
         public void InitDice()
         {
+            // make and add info to list
             DiceInfo info = new DiceInfo();
-            // are we just setting dice Index to 0?
             info.diceIndex = diceIndex;
             info.diceNumber = 0;
             info.sortedIndex = 0;
             info.rolling = false;
             info.keeping = false;
             diceInfoList.Add(info);
-            diceInfo = info;
+            this.diceInfo = info;
+            Debug.Log("Dice initied, diceInfoList count:" + diceInfoList.Count);
         }
 
         // Update is called once per frame
@@ -134,7 +125,6 @@ namespace XReal.XTown.Yacht
         public void Ready()
         {
             rb.isKinematic = false;
-            Debug.LogWarning("CheckError:" + CupManager.instance.inCupSpawnTransforms[diceIndex].position);
             transform.position = CupManager.instance.inCupSpawnTransforms[diceIndex].position;
             transform.rotation = Random.rotation;
         }
@@ -152,6 +142,7 @@ namespace XReal.XTown.Yacht
 
         public void OnRollingFinish()
         {
+            Debug.Log("OnRollingFinish called on a dice!");
             rb.isKinematic = true;
             prevPosition = transform.position;
             prevRotation = transform.rotation;

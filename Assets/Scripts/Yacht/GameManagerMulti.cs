@@ -39,23 +39,7 @@ namespace XReal.XTown.Yacht
             }
             // this will set MeDone.
             NetworkManager.Instance.SendFinishTurn();
-            
-            // you must not reinitialize gameState. That'll cause animator collision!
         }
-        /* 
-=
-
-        public void Onclick_endTurn()
-        {
-            NetworkManager.Instance.SendFinishTurn();
-            if (NetworkManager.Instance.MeDone)
-            {
-                diceBtn.interactable = false;
-                endBtn.interactable = false;
-            }
-        }
-
-        */
         public Text turnText;
 
         
@@ -71,12 +55,19 @@ namespace XReal.XTown.Yacht
         /// </summary>
         public void OnTurnBegins(int turn)
         {
-            if (NetworkManager.Instance.MeDone) return;
+            SetTurnText(turn);
+
+            if (NetworkManager.Instance.MeDone)
+            {
+                Debug.Log($"I'm done, it's other's turn" + turn);
+                return;
+            }
             // request ownership
             CupManagerMulti.RequestCupOwnership();
+            DiceManagerMulti.RequestDiceOwnership();
             SetGameState(GameState.initializing);
             Debug.Log("GameManager/OnTurnBegins Turn #" + turn);
-            SetTurnText(turn);
+
         }
 
         public void OnPlayerDiceResult(Player player, int turn, int[] results)
@@ -99,14 +90,15 @@ namespace XReal.XTown.Yacht
                 return;
             }
 
+            Debug.Log("player #" + player.ActorNumber + "'s turn end synced");
+
             if (player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber) // me finished
             {
+                Debug.Log("my turn finished!");
                 return;
             }
-            // other's turn finished
-            Debug.Log("player #" + player.ActorNumber + "'s turn end synced");
-            Debug.Log("player #" + PhotonNetwork.LocalPlayer.ActorNumber + " beginning turn");
-            // if I'm not finished, I guess it's my turn -> will invoke OnBeginTurn
+            // other's turn finished I take control
+            Debug.Log("It's my turn now");
             NetworkManager.Instance.BeginTurn();
         }
     }
