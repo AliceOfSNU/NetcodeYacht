@@ -48,6 +48,7 @@ namespace XReal.XTown.Yacht
                     Destroy(oldDice.gameObject);
                 }
                 DiceScript.diceInfoList.Clear();
+                DiceManager.dices.Clear();
             }
             else
             {

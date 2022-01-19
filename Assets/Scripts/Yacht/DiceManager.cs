@@ -8,14 +8,14 @@ namespace XReal.XTown.Yacht
 {
     public class DiceManager : MonoBehaviour
     {
-        public static DiceScriptMulti[] dices;
+        public static List<DiceScriptMulti> dices;
         public UnityEvent onRollingFinish;
 
         public static DiceManager instance;
         protected virtual void Awake()
         {
             instance = this;
-            dices = transform.GetComponentsInChildren<DiceScriptMulti>();
+            dices = transform.GetComponentsInChildren<DiceScriptMulti>().ToList();
         }
 
 

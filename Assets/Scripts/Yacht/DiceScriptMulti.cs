@@ -7,17 +7,23 @@ using UnityEngine;
 namespace XReal.XTown.Yacht
 {
 
-    public class DiceScriptMulti : DiceScript
+    public class DiceScriptMulti : DiceScript, IPunOwnershipCallbacks
     {
         PhotonTransformView _transformView;
         PhotonView _view;
+
+        
         protected override void Start()
         {
             _transformView = GetComponent<PhotonTransformView>();
             _view = GetComponent<PhotonView>();
 
-            Debug.Log("DiceScriptMulti/Start");
-
+            if (DiceManager.dices.Count != 5) // list not full: because local copies destroyed
+            {
+                diceIndex = DiceManager.dices.Count;
+                DiceManager.dices.Add(this);
+                Debug.Log("DiceScript/Start: " + diceIndex);
+            }
             base.Start();
 
             if (!NetworkManager.Instance.networked)
@@ -104,32 +110,37 @@ namespace XReal.XTown.Yacht
             }
         }
 
+
         /// Ownership
         public void RequestOwnership()
         {
             if (_view.OwnerActorNr == PhotonNetwork.LocalPlayer.ActorNumber) return;
+            Debug.Log("DiceScript/ Request ownership " + diceIndex);
             _view.RequestOwnership();
         }
 
-        /// photon callbacks
-        public void OnOwnershipRequest(object[] viewAndPlayer)
-        {
-            PhotonView view = viewAndPlayer[0] as PhotonView;
-            Player requestingPlayer = viewAndPlayer[1] as Player;
-            Debug.Log("inside on ownership request from #" + requestingPlayer.ActorNumber);
-            if (view.OwnerActorNr != PhotonNetwork.LocalPlayer.ActorNumber) return;
-            Debug.Log("handing over dice control to: player#" + requestingPlayer.ActorNumber);
 
-            try
-            {
-                view.TransferOwnership(requestingPlayer);
-            }
-            catch
-            {
-                Debug.LogError("Couldn't transfer control of cup.");
-            }
+
+        /// photon callbacks
+
+
+        public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
+        {
+            if (_view.OwnerActorNr != PhotonNetwork.LocalPlayer.ActorNumber) return;
+            Debug.Log("handing over dice" + diceIndex + "control to: player#" + requestingPlayer.ActorNumber);
+            _view.TransferOwnership(requestingPlayer);
+            
         }
 
+        public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
+        {
+            Debug.Log("DiceScript/OnOwnershipTransfered" + diceIndex);
+        }
+
+        public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
+        {
+            Debug.Log("DiceScript/OnOwnershipTransferFailed" + diceIndex);
+        }
     }
 }
 

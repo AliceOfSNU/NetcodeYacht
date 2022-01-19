@@ -19,14 +19,17 @@ namespace XReal.XTown.Yacht
             {
                 // dice info list will be initialized inside Instantiated dice's Start method.
                 dice = PhotonNetwork.Instantiate(DicePrefab.name, this.transform.position, Quaternion.identity).GetComponent<DiceScriptMulti>();
+                /*
                 dice.diceIndex = diceIndex;
                 dices[diceIndex] = dice;
+                */
             }
         }
 
         public static void RequestDiceOwnership()
         {
-            Debug.Log("Requesting ownership of all dices");
+            Debug.Log("Requesting ownership of all dices count" + dices.Count);
+            
             foreach(DiceScriptMulti dice in dices)
             {
                 dice.RequestOwnership();
