@@ -11,6 +11,8 @@ namespace XReal.XTown.Yacht
 
         protected override void OnTriggerStay(Collider col)
         {
+            if(col==null)
+            return;
             if (!NetworkManager.Instance.networked)
             {
                 base.OnTriggerStay(col);
