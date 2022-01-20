@@ -55,7 +55,7 @@ namespace XReal.XTown.Yacht
             info.keeping = false;
             diceInfoList.Add(info);
             this.diceInfo = info;
-            Debug.Log("Dice initied, diceInfoList count:" + diceInfoList.Count);
+            Debug.Log("Dice initied, diceInfoList count:" + diceIndex);
         }
 
         // Update is called once per frame

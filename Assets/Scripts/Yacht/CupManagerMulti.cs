@@ -13,6 +13,11 @@ namespace XReal.XTown.Yacht
         private static PhotonTransformView transformView;
         private static PhotonAnimatorView animView;
         private static PhotonView view;
+
+        public bool IsMine
+        {
+            get => view.IsMine;
+        }
         protected override void Awake()
         {
             base.Awake();
@@ -54,6 +59,24 @@ namespace XReal.XTown.Yacht
         }
 
         /// photon callbacks
+        public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
+        {
+            if (targetView != view) return;
+            if (view.OwnerActorNr != PhotonNetwork.LocalPlayer.ActorNumber) return;
+            Debug.Log("handing over cup control to: player#" + requestingPlayer.ActorNumber);
+            view.TransferOwnership(requestingPlayer);
+        }
+
+        public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
+        {
+            if (targetView != view) return;
+            GameManagerMulti.CheckAllMine();
+        }
+
+        public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
+        {
+            if (targetView != view) return;
+        }
         public void OnOwnershipRequest(object[] viewAndPlayer)
         {
             PhotonView view = viewAndPlayer[0] as PhotonView;

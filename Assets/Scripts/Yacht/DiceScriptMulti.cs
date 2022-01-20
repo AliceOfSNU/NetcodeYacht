@@ -36,6 +36,19 @@ namespace XReal.XTown.Yacht
 
         }
 
+        void OnEnable()
+        {
+            if (!NetworkManager.Instance.networked) return;
+            // this is needed to receive ownership transfer messages.
+            // maybe we should collect all ownership related functions to a single interface(ITransferable)
+            PhotonNetwork.AddCallbackTarget(this);
+        }
+
+        void OnDisable()
+        {
+            if (!NetworkManager.Instance.networked) return;
+            PhotonNetwork.RemoveCallbackTarget(this);
+        }
 
         // Update is called once per frame
         protected override void Update()
@@ -119,26 +132,29 @@ namespace XReal.XTown.Yacht
             _view.RequestOwnership();
         }
 
-
+        public bool IsMine
+        {
+            get => _view.IsMine;
+        }
 
         /// photon callbacks
-
-
         public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
         {
+            if (targetView != _view) return;
             if (_view.OwnerActorNr != PhotonNetwork.LocalPlayer.ActorNumber) return;
             Debug.Log("handing over dice" + diceIndex + "control to: player#" + requestingPlayer.ActorNumber);
             _view.TransferOwnership(requestingPlayer);
-            
         }
 
         public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
         {
-            Debug.Log("DiceScript/OnOwnershipTransfered" + diceIndex);
+            if (targetView != _view) return;
+            GameManagerMulti.CheckAllMine();
         }
 
         public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
         {
+            if (targetView != _view) return;
             Debug.Log("DiceScript/OnOwnershipTransferFailed" + diceIndex);
         }
     }
