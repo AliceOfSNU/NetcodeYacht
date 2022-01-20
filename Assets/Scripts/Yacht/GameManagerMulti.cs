@@ -16,19 +16,22 @@ namespace XReal.XTown.Yacht
     {
 
 
-        // Update is called once per frame
+        /// <summary>
+        /// Monobehaviour event callbacks
+        /// </summary>
         protected override void Update()
         {
-            if (NetworkManager.Instance is null) return;
             if (!NetworkManager.Instance.networked)
             { // call base function if not networked.
                 base.Update();
                 return;
             }
-            if (NetworkManager.Instance.MeDone || NetworkManager.Instance.Turn < 1) return;
+            if (NetworkManager.Instance.MeDone || !IsReady || NetworkManager.Instance.Turn < 1) return;
             base.Update();
         }
 
+        // public methods
+        public static bool IsReady = false;
 
         // called by selectScore once score selected.
         public static void TurnFinish()
@@ -56,20 +59,34 @@ namespace XReal.XTown.Yacht
         public void OnTurnBegins(int turn)
         {
             SetTurnText(turn);
+            SetGameState(GameState.initializing);
 
             if (NetworkManager.Instance.MeDone)
             {
-                Debug.Log($"I'm done, it's other's turn" + turn);
+                Debug.Log($"GameManager/I'm done, it's other's turn" + turn);
                 return;
             }
+
             // request ownership
+            if (CheckAllMine()) return;
+            // these are non-blocking. wait for callback.
             CupManagerMulti.RequestCupOwnership();
             DiceManagerMulti.RequestDiceOwnership();
-            SetGameState(GameState.initializing);
-            Debug.Log("GameManager/OnTurnBegins Turn #" + turn);
+            Debug.Log("GameManager/My turn begins: #" + turn);
+
 
         }
 
+        public static bool CheckAllMine()
+        {
+            bool isMine = CupManagerMulti.instance.GetComponent<CupManagerMulti>().IsMine;
+            foreach (DiceScriptMulti dice in DiceManager.dices)
+            {
+                isMine = isMine & dice.IsMine;
+            }
+            IsReady = isMine;
+            return isMine;
+        }
         public void OnPlayerDiceResult(Player player, int turn, int[] results)
         {
             string msg = "on turn #" + turn + ", player " + player.ActorNumber + " rolled: ";
@@ -90,15 +107,12 @@ namespace XReal.XTown.Yacht
                 return;
             }
 
-            Debug.Log("player #" + player.ActorNumber + "'s turn end synced");
 
             if (player.ActorNumber == PhotonNetwork.LocalPlayer.ActorNumber) // me finished
             {
-                Debug.Log("my turn finished!");
                 return;
             }
             // other's turn finished I take control
-            Debug.Log("It's my turn now");
             NetworkManager.Instance.BeginTurn();
         }
     }

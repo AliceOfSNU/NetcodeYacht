@@ -38,8 +38,10 @@ namespace XReal.XTown.Yacht
         // Start is called before the first frame update
         protected virtual void Start()
         {
+            
             rb = GetComponent<Rigidbody>();
             InitDice();
+
         }
 
         public void InitDice()
@@ -53,7 +55,7 @@ namespace XReal.XTown.Yacht
             info.keeping = false;
             diceInfoList.Add(info);
             this.diceInfo = info;
-            Debug.Log("Dice initied, diceInfoList count:" + diceInfoList.Count);
+            Debug.Log("Dice initied, diceInfoList count:" + diceIndex);
         }
 
         // Update is called once per frame
@@ -142,7 +144,6 @@ namespace XReal.XTown.Yacht
 
         public void OnRollingFinish()
         {
-            Debug.Log("OnRollingFinish called on a dice!");
             rb.isKinematic = true;
             prevPosition = transform.position;
             prevRotation = transform.rotation;
