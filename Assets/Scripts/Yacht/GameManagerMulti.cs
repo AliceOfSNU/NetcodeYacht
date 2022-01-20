@@ -85,6 +85,7 @@ namespace XReal.XTown.Yacht
                 isMine = isMine & dice.IsMine;
             }
             IsReady = isMine;
+            Debug.Log("GameManager/CheckAllMine:" + isMine);
             return isMine;
         }
         public void OnPlayerDiceResult(Player player, int turn, int[] results)
