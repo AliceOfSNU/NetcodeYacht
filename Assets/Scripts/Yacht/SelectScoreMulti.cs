@@ -22,6 +22,7 @@ namespace XReal.XTown.Yacht
                     NetworkManager.Instance.SendStrategySelected(
                         StrategyScript.strategies[categoryText.text]["order"],
                         StrategyScript.strategies[categoryText.text]["score"]);
+                    GameManagerMulti.MyTotalPoints = StrategyScript.strategies["Total"]["score"];
                     GameManager.SetGameState(GameState.initializing);
                     GameManagerMulti.TurnFinish();
                 }

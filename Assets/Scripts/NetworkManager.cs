@@ -100,6 +100,7 @@ namespace XReal.XTown.Yacht
         public const byte EvDiceResult = 1 + TurnEventOffset;
         public const byte EvStrategySelected = 2 + TurnEventOffset;
         public const byte EvFinishTurn = 3 + TurnEventOffset;
+        public const byte EvEndGame = 4 + TurnEventOffset;
 
         // public methods
         public void BeginTurn()
@@ -160,7 +161,12 @@ namespace XReal.XTown.Yacht
             // send finishing message
             Hashtable ht = new Hashtable();
             ht.Add("turn", Turn);
-
+            if(Turn == 24)
+            {
+                PhotonNetwork.RaiseEvent(EvEndGame, ht, new RaiseEventOptions() { CachingOption = EventCaching.AddToRoomCache }, SendOptions.SendReliable);
+                ProcessOnEvent(EvEndGame, ht, PhotonNetwork.LocalPlayer.ActorNumber);
+                return;
+            }
             PhotonNetwork.RaiseEvent(EvFinishTurn, ht, new RaiseEventOptions() { CachingOption = EventCaching.AddToRoomCache }, SendOptions.SendReliable);
             ProcessOnEvent(EvFinishTurn, ht, PhotonNetwork.LocalPlayer.ActorNumber);
         }
@@ -199,6 +205,13 @@ namespace XReal.XTown.Yacht
                         TurnListener.OnPlayerFinished(sender, turn);
                         break;
                     }
+                case EvEndGame:
+                    {
+                         Hashtable evTable = data as Hashtable;
+                         int turn = (int)evTable["turn"];
+                         TurnListener.OnGameEnd(sender,turn);
+                         break;
+                    }
             }
         }
 
@@ -234,6 +247,8 @@ namespace XReal.XTown.Yacht
         void OnPlayerStrategySelected(Player player, int turn, int move, int score);
 
         void OnPlayerFinished(Player player, int turn);
+
+        void OnGameEnd(Player player, int turn);
     }
 
     public static class TurnExtensions

@@ -56,11 +56,11 @@ namespace XReal.XTown.Yacht
                 }
             }
         }
-        public static void UpdateOtherScoreTable(int move, int points)
+        public static int UpdateOtherScoreTable(int move, int points)
         {
-            if(!NetworkManager.Instance.MeDone)  return;
             int bonusSum = 0;
             otherPoints[move] = points;
+            otherPoints[13] = 0;
             for (int i = 0; i < 6; i++)
             {
                 bonusSum += otherPoints[i];
@@ -81,6 +81,7 @@ namespace XReal.XTown.Yacht
             }
             scoreTextsOther[13].color = Color.black;
             scoreTextsOther[13].text = otherPoints[13].ToString();
+            return otherPoints[13];
         }     
 
     }
