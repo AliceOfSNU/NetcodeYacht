@@ -21,6 +21,8 @@ namespace XReal.XTown.Yacht
         /// </summary>
         protected override void Update()
         {
+            if(NetworkManager.Instance is null)
+            return;
             if (!NetworkManager.Instance.networked)
             { // call base function if not networked.
                 base.Update();
@@ -95,9 +97,10 @@ namespace XReal.XTown.Yacht
             Debug.Log(msg);
         }
 
-        public void OnPlayerStrategySelected(Player player, int turn, int move)
+        public void OnPlayerStrategySelected(Player player, int turn, int move, int score)
         {
             string msg = "on turn #" + turn + ", player " + player.ActorNumber + " selected: " + move;
+            ScoreTableMulti.UpdateOtherScoreTable(move,score);
         }
 
         public void OnPlayerFinished(Player player, int turn)

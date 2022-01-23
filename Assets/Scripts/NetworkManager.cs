@@ -129,7 +129,7 @@ namespace XReal.XTown.Yacht
             ProcessOnEvent(EvDiceResult, ht, PhotonNetwork.LocalPlayer.ActorNumber);
         }
 
-        public void SendStrategySelected(int strategy)
+        public void SendStrategySelected(int strategy, int score)
         {
             if (MeDone)
             {
@@ -140,6 +140,7 @@ namespace XReal.XTown.Yacht
             Hashtable ht = new Hashtable();
             ht.Add("turn", Turn);
             ht.Add("move", (object)strategy);
+            ht.Add("score",(object)score);
 
             PhotonNetwork.RaiseEvent(EvStrategySelected, ht, new RaiseEventOptions() { CachingOption = EventCaching.AddToRoomCache }, SendOptions.SendReliable);
             ProcessOnEvent(EvStrategySelected, ht, PhotonNetwork.LocalPlayer.ActorNumber);
@@ -186,8 +187,8 @@ namespace XReal.XTown.Yacht
                         Hashtable evTable = data as Hashtable;
                         int turn = (int)evTable["turn"];
                         int strategy = (int)evTable["move"];
-
-                        TurnListener.OnPlayerStrategySelected(sender, turn, strategy);
+                        int score = (int)evTable["score"];
+                        TurnListener.OnPlayerStrategySelected(sender, turn, strategy, score);
                         break;
                     }
                 case EvFinishTurn:
@@ -230,7 +231,7 @@ namespace XReal.XTown.Yacht
 
         void OnPlayerDiceResult(Player player, int turn, int[] results);
 
-        void OnPlayerStrategySelected(Player player, int turn, int move);
+        void OnPlayerStrategySelected(Player player, int turn, int move, int score);
 
         void OnPlayerFinished(Player player, int turn);
     }
